@@ -7,6 +7,8 @@
     "dev:ws": "nodemon websocket.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently --kill-others \"npm run dev:api\" \"npm run dev:ws\"",
+    "start:api": "node index.js",
+    "start:ws": "node websocket.js",
     "start": "concurrently --kill-others \"npm run start:api\" \"npm run start:ws\""
   },
   "type": "module",
