@@ -17,10 +17,12 @@ app.use(
 );
 app.use(cookieParser());
 
+const PORT = process.env.PORT || 3000;
+
 import userRouter from "./routes/userRoute.js";
 import roomRouter from "./routes/roomRoute.js";
 
 app.use("/api/user", userRouter);
 app.use("/api/room", roomRouter);
 
-app.listen(3000, "0.0.0.0");
+app.listen(PORT, "0.0.0.0");

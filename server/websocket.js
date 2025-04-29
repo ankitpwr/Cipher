@@ -4,8 +4,8 @@ import url from "url";
 import redis from "./config/redisDB.js";
 import { v4 as uuidv4 } from "uuid";
 import { type } from "os";
-
-const wss = new WebSocketServer({ host: "0.0.0.0", port: 8080 });
+const PORT = process.env.PORT_WS || 8080;
+const wss = new WebSocketServer({ host: "0.0.0.0", port: PORT });
 
 const clientMap = new Map();
 
