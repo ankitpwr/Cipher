@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import sideImg from "../assets/signupimg.jpeg";
+import sideImg from "../assets/signupImg.jpeg";
 import InputBox from "@/components/InputBox";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
