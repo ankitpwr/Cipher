@@ -22,6 +22,8 @@ const register = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: ".onrender.com",
+      path: "/",
       maxAge: 1000 * 60 * 60 * 168,
     });
 
@@ -66,6 +68,8 @@ const login = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: ".onrender.com",
+      path: "/",
       maxAge: 1000 * 60 * 60 * 168,
     });
 
