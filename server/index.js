@@ -9,6 +9,7 @@ import setupWebsockets from "./websocket.js";
 dotenv.config();
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 const server = http.createServer(app);
 const wss = new WebSocketServer({ server });
@@ -22,7 +23,6 @@ app.use(
     credentials: true,
   })
 );
-app.use(cookieParser());
 
 const PORT = process.env.PORT || 8080;
 

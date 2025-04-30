@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { PrismaClient } from "@prisma/client";
 
+const isProd = process.env.PROD === "production";
+
 const client = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -20,8 +22,8 @@ const register = async (req, res) => {
     const token = jwt.sign({ userId: userDetails.id }, JWT_SECRET);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
       domain: ".onrender.com",
       path: "/",
       maxAge: 1000 * 60 * 60 * 168,
@@ -41,6 +43,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+  console.log(isProd);
   try {
     const userDetails = await client.user.findFirst({
       where: {
@@ -66,13 +69,13 @@ const login = async (req, res) => {
     const token = jwt.sign({ userId: userDetails.id }, JWT_SECRET);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
-      domain: ".onrender.com",
+      secure: false,
+      sameSite: "lax",
       path: "/",
+      domain: ".onrender.com",
       maxAge: 1000 * 60 * 60 * 168,
     });
-
+    console.log(`token is ${token}`);
     return res.status(200).json({
       message: "successfully logged in",
       token: token,
@@ -89,11 +92,11 @@ const logout = async (req, res) => {
   try {
     return res
       .clearCookie("token", {
-        path: "/",
         httpOnly: true,
-        sameSite: "none",
+        secure: isProd,
+        sameSite: isProd ? "none" : "lax",
         domain: ".onrender.com",
-        secure: true,
+        path: "/",
         maxAge: 0,
       })
       .status(200)

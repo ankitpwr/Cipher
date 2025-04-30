@@ -3,6 +3,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 const authUser = async (req, res, next) => {
   const token = req.cookies.token;
+  console.log(token);
 
   if (!token) {
     return res.status(401).json({
@@ -16,7 +17,7 @@ const authUser = async (req, res, next) => {
       message: "Invalid Credentials",
     });
   }
-
+  console.log(token);
   req.userId = decodedData.userId;
   next();
 };

@@ -13,9 +13,9 @@ const userDetails = (set) => ({
     set((state) => ({ loading: true }));
 
     try {
-      const response = await axios(
+      const response = await axios.get(
         `${baseURL}/api/user/user-details`,
-        {},
+
         {
           withCredentials: true,
         }
