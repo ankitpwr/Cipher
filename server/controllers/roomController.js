@@ -5,7 +5,7 @@ const EPHEMERAL_PERIOD = 1 * 60 * 1000;
 
 const createRoom = async (req, res) => {
   try {
-    const userId = req.body.userId;
+    const userId = req.userId;
     if (!userId) {
       return res.status(400).json({
         message: "Invalid user",
@@ -94,7 +94,7 @@ const joinRoom = async (req, res) => {
     const isAlreadyUser = await client.roomMember.findFirst({
       where: {
         roomId: roomId,
-        userId: req.body.userId,
+        userId: req.userId,
       },
     });
 
@@ -106,7 +106,7 @@ const joinRoom = async (req, res) => {
 
     const response = await client.roomMember.create({
       data: {
-        userId: req.body.userId,
+        userId: req.userId,
         roomId: roomId,
       },
     });
@@ -161,7 +161,7 @@ const allRoomMemebers = async (req, res) => {
 
 const joinedRooms = async (req, res) => {
   try {
-    const userId = req.body.userId;
+    const userId = req.userId;
 
     if (!userId) {
       return res.status(400).json({
@@ -186,7 +186,7 @@ const joinedRooms = async (req, res) => {
 const leaveRoom = async (req, res) => {
   try {
     const roomId = parseInt(req.body.roomId);
-    const userId = req.body.userId;
+    const userId = req.userId;
 
     const isMemeber = await client.roomMember.findFirst({
       where: {

@@ -13,9 +13,13 @@ const userDetails = (set) => ({
     set((state) => ({ loading: true }));
 
     try {
-      const response = await axios(`${baseURL}/api/user/user-details`, {
-        withCredentials: true,
-      });
+      const response = await axios(
+        `${baseURL}/api/user/user-details`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
       const userData = response.data.message;
       set((state) => ({ user: userData, loading: false }));
     } catch (error) {

@@ -78,7 +78,7 @@ const login = async (req, res) => {
       token: token,
     });
   } catch (error) {
-    return res.json(400).json({
+    return res.status(400).json({
       message: "unable to login",
       error: error,
     });
@@ -107,8 +107,8 @@ const logout = async (req, res) => {
 
 const userDetails = async (req, res) => {
   try {
-    const userId = req.body.userId;
-
+    const userId = req.userId;
+    console.log(userId);
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
     }
@@ -117,6 +117,7 @@ const userDetails = async (req, res) => {
         id: userId,
       },
     });
+    console.log(useData);
 
     if (!useData) {
       return res.status(400).json({
