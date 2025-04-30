@@ -91,7 +91,9 @@ const logout = async (req, res) => {
       .clearCookie("token", {
         path: "/",
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: "none",
+        domain: ".onrender.com",
+        secure: true,
         maxAge: 0,
       })
       .status(200)
