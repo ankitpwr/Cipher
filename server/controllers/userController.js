@@ -24,7 +24,6 @@ const register = async (req, res) => {
       httpOnly: true,
       secure: isProd,
       sameSite: isProd ? "none" : "lax",
-      domain: ".onrender.com",
       path: "/",
       maxAge: 1000 * 60 * 60 * 168,
     });
@@ -72,7 +71,6 @@ const login = async (req, res) => {
       secure: false,
       sameSite: "lax",
       path: "/",
-      domain: ".onrender.com",
       maxAge: 1000 * 60 * 60 * 168,
     });
     console.log(`token is ${token}`);
@@ -95,7 +93,6 @@ const logout = async (req, res) => {
         httpOnly: true,
         secure: isProd,
         sameSite: isProd ? "none" : "lax",
-        domain: ".onrender.com",
         path: "/",
         maxAge: 0,
       })
