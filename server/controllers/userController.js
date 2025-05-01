@@ -68,8 +68,8 @@ const login = async (req, res) => {
     const token = jwt.sign({ userId: userDetails.id }, JWT_SECRET);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
       path: "/",
       maxAge: 1000 * 60 * 60 * 168,
     });
